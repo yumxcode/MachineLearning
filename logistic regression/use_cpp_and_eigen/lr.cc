@@ -30,12 +30,12 @@ void LR::fit(MatrixXd X,VectorXi y){
 
 	for(int iter=0;iter<max_iter;iter++){
 		VectorXd y_pred = predict_prob(X);
-        VectorXd y_d = y.cast<double>();  //cast type first
+                VectorXd y_d = y.cast<double>();  //cast type first
 		VectorXd E = y_pred - y_d;
 
 		W = (1.0-lambda/y.size())*W - alpha*X_new.transpose()*E;  //W:= (1-lambda/n_samples)W-alpha*X^T*E
 		//reference : http://blog.csdn.net/pakko/article/details/37878837
-		
+		//(1.0-lambda/y.size())*w代表什么意思？ zj
 		//when loss<tol, break
 		double loss = CommonFunctions::crossEntropyLoss(y,predict_prob(X));
 		if(loss<=tol) break;
